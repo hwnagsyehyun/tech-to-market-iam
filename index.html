@@ -398,6 +398,21 @@ h1{font-size:clamp(30px,4.6vw,48px)}
 .starbar .acts a:hover,.starbar .acts button:hover{background:var(--leaf)}
 .starbar[hidden]{display:none}
 @media (max-width:640px){.starbar{margin:10px 12px 0;font-size:14px}.starbar .acts{margin-left:0}.bar .wbtn{margin-left:0;font-size:13px}}
+
+/* 관심 공고: 북마크 아이콘(A안) */
+.star{all:unset;box-sizing:border-box;cursor:pointer;position:absolute;top:8px;right:8px;width:30px;height:32px;display:grid;place-items:center;z-index:1;border:0;background:none}
+.star svg{width:17px;height:22px}
+.star svg path{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;transition:fill .12s,stroke .12s}
+.star:hover svg path{stroke:var(--green);fill:rgba(24,121,74,.12)}
+.star[aria-pressed="true"]{background:none}
+.star[aria-pressed="true"] svg path{fill:var(--green);stroke:var(--green)}
+.star:focus-visible{outline:2px solid var(--green);outline-offset:1px}
+.bar .wbtn svg{width:12px;height:16px}
+.bar .wbtn svg path{fill:var(--green)}
+.bar .wbtn[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf)}
+.bar .wbtn[aria-pressed="true"] svg path{fill:var(--ink)}
+.starbar .sbt{display:inline-flex;align-items:center;gap:8px}
+.starbar .sbt svg{width:12px;height:16px}.starbar .sbt svg path{fill:var(--leaf)}
 </style>
 
 <div class="sh-bg" id="shareBox" hidden role="dialog" aria-modal="true" aria-labelledby="shTitle">
@@ -434,7 +449,7 @@ h1{font-size:clamp(30px,4.6vw,48px)}
 
   <div class="bar" role="search">
     <div class="tabs" id="tabs"></div>
-    <button class="wbtn" type="button" id="starBtn" aria-pressed="false"><i>★</i>관심 <b id="starN">0</b></button>
+    <button class="wbtn" type="button" id="starBtn" aria-pressed="false"><svg viewBox="0 0 22 28" aria-hidden="true"><path d="M3 2h16v23l-8-6-8 6z"/></svg>관심 공고 <b id="starN">0</b></button>
     <button class="fresh" type="button" id="freshBtn" aria-pressed="false" hidden>새 공고 <b id="freshN">0</b></button>
     <div class="brk"></div>
     <input id="q" class="ctrl" type="search" placeholder="사업명·기관·지원내용 검색" aria-label="검색">
@@ -453,7 +468,7 @@ h1{font-size:clamp(30px,4.6vw,48px)}
     <label class="chk"><input type="checkbox" id="onlyNew"><span>2026 신설·개편</span></label>
   </div>
 
-  <div class="starbar" id="starbar" hidden><span>★ 관심 공고 <span id="starbarN">0</span>건</span><span class="sm" id="starbarSm">이 브라우저에 저장됨</span>
+  <div class="starbar" id="starbar" hidden><span class="sbt"><svg viewBox="0 0 22 28" aria-hidden="true"><path d="M3 2h16v23l-8-6-8 6z"/></svg>관심 공고 <span id="starbarN">0</span>건</span><span class="sm" id="starbarSm">이 브라우저에 저장됨</span>
     <span class="acts"><button type="button" id="starCopy">목록 링크 복사</button><button type="button" id="starClear">비우기</button></span></div>
   <div id="view-now">
   <h2 class="sec-band b-now">2026 · 지금 신청 가능한 공고 <span>2026.10.14 확인 공고 중 마감 전 · 마감 임박 순 · 신청 전 공고 원문 확인</span></h2>
@@ -607,7 +622,8 @@ try { (JSON.parse(localStorage.getItem("iam_stars") || "[]")).forEach(k => STARS
 let SHARED_STARS = false;
 try { const m = location.hash.match(/star=([^&]+)/); if (m) { decodeURIComponent(m[1]).split(",").filter(Boolean).forEach(k => STARS.add(k)); SHARED_STARS = true; } } catch(e) {}
 const saveStars = () => { try { localStorage.setItem("iam_stars", JSON.stringify([...STARS])); } catch(e) {} };
-const starBtn = k => `<button class="star" type="button" data-star="${esc(k)}" aria-pressed="${STARS.has(k)}" aria-label="관심 공고 담기" title="관심 공고 담기">${STARS.has(k) ? "★" : "☆"}</button>`;
+const BMK = '<svg viewBox="0 0 22 28" aria-hidden="true"><path d="M3 2h16v23l-8-6-8 6z"/></svg>';
+const starBtn = k => { const on = STARS.has(k); return `<button class="star" type="button" data-star="${esc(k)}" aria-pressed="${on}" aria-label="${on ? "관심 공고에서 빼기" : "관심 공고로 담기"}" title="${on ? "관심 공고에서 빼기" : "관심 공고로 담기"}">${BMK}</button>`; };
 const ymd = s => s.replace(/-/g, "");
 const nextDay = s => { const d = parseD(s); d.setDate(d.getDate()+1); return d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0"); };
 const icsEsc = t => String(t||"").replace(/\\/g,"\\\\").replace(/;/g,"\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");
