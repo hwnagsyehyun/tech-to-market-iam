@@ -1,1 +1,3 @@
-# tech-to-market-iam
+# 광주·전남 기술사업화 지원사업 카탈로그
+
+https://iam-bp.kr/ · 특허법인 아이엠 기술사업화팀
