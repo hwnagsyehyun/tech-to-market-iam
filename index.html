@@ -15,21 +15,21 @@
 </head>
 <body>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800;900&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* Layout: 표제란 머리띠 → 카테고리 4칸 → 고정 도구줄 → 예상 공고 월 막대 → 사업 카드 격자 → 주석. 도면지 한 장 위에 놓인 카탈로그 (단일 밝은 테마로 고정) */
 :root{
   --paper:#F3F8F3; --grid:#D6E8D8; --ink:#13422F; --mid:#2C5A43; --muted:#4E6B5B;
   --line:#85A592; --leaf:#8BDB5A; --green:#18794A; --card:#FFFFFF; --soft:#EAF4EC;
-  --display:"Gothic A1","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  --body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --display:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --body:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   color-scheme: light;
 }
 html{background:var(--paper)}
 [hidden]{display:none!important}
-body{margin:0;background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6}
+body{margin:0;background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;font-variant-numeric:tabular-nums;letter-spacing:-.003em}
 .wrap{max-width:1200px;margin:0 auto;padding-inline:16px;padding-block:20px 56px}
 .sheet{border:3px solid var(--ink);background:rgba(243,248,243,.86)}
 .titleblock{display:grid;grid-template-columns:auto minmax(0,1fr) auto;border-bottom:3px solid var(--ink);background:var(--card)}
