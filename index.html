@@ -562,8 +562,10 @@ const $ = s => document.querySelector(s);
 const ck = c => "";
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const state = {cat:"", q:"", region:"", sort:"m", onlyNew:false, month:null, ind:"", sup:"", mode:"now", fresh:false, starOnly:false};
-const NEW_DAYS = 7;
-const isFresh = o => !!o.added && (today - parseD(o.added)) / 864e5 < NEW_DAYS;
+const NEW_DAYS = 3;
+/* 새 공고 = 기관이 공고를 낸 날(posted, 없으면 접수 시작일) 기준 3일 이내. 접수 시작이 미래면 카탈로그에 담은 날(added)로 본다 */
+const pubDate = o => o.posted || ((o.start && o.added && o.start > o.added) ? o.added : (o.start || o.added));
+const isFresh = o => { const d = pubDate(o); if (!d) return false; const g = (today - parseD(d)) / 864e5; return g >= 0 && g <= NEW_DAYS; };
 /* 공유 링크로 열면 관심 보기 */
 try { if (/star=/.test(location.hash)) setTimeout(() => { state.starOnly = true; render(); }, 0); } catch(e) {}
 try { const s = JSON.parse(localStorage.getItem("iam_catalog_pub") || "null"); if (s && ["now","next","plan"].includes(s.mode)) state.mode = s.mode; } catch(e) {}
@@ -707,7 +709,7 @@ function filterParts(){
   if (state.ind) p.push(state.ind);
   if (state.sup) p.push(state.sup);
   if (state.q) p.push(`"${state.q}"`);
-  if (state.fresh) p.push("최근 7일 새 공고");
+  if (state.fresh) p.push("최근 3일 새 공고");
   if (state.starOnly) p.push("관심 공고");
   return p;
 }
