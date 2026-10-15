@@ -165,6 +165,10 @@ h1 em{font-style:normal;background:linear-gradient(transparent 60%,var(--leaf) 6
 .sec-band.b-now{background:var(--ink);color:#fff}
 .sec-band.b-now span{color:#CFE5D5}
 .sec-band.b-next{background:var(--leaf);color:var(--ink)}
+.caution{margin:14px 32px 0;display:flex;gap:14px;align-items:flex-start;background:#FFF8E1;border:2px solid var(--ink);border-left-width:6px;padding:12px 16px;font-size:14px;line-height:1.6;color:var(--ink)}
+.caution b{flex:none;font-family:var(--display);font-weight:800;background:var(--ink);color:#fff;padding:2px 9px;font-size:13px;margin-top:2px}
+.caution p{margin:0}.caution strong{font-weight:800}
+@media (max-width:640px){.caution{margin:10px 14px 0;flex-direction:column;gap:6px;font-size:13.5px;padding:10px 12px}}
 .mode[aria-pressed="true"].m-plan{background:#CFE5D5}
 .sec-band.b-plan{background:#CFE5D5;color:var(--ink)}
 .plan-intro{margin:20px 32px 0;background:var(--card);border:2.5px solid var(--ink);padding:16px 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;font-size:13.5px;line-height:1.6}
@@ -483,6 +487,8 @@ h1{font-size:clamp(30px,4.6vw,48px)}
   <div id="view-next" hidden>
   <h2 class="sec-band b-next">2027 · 내년 예상 공고 <span>2025·2026 공고 시기로 본 예상 · 공고 전 준비용</span></h2>
 
+  <div class="caution" role="note"><b>참고용 안내</b><p>내년 예상 공고는 지난 공고 시기를 바탕으로 정리한 <strong>참고 자료</strong>입니다. 정부 예산·정책 등 상황에 따라 공고 시기와 내용이 바뀌거나 사업이 없어질 수 있으니, 신청 전 실제 공고문을 꼭 확인하세요.</p></div>
+
   <section class="months" aria-label="예상 공고 월">
     <div class="months-h"><b>예상 공고 월</b><span>막대를 누르면 그 달에 나올 사업만 봅니다</span></div>
     <div class="mstrip" id="mstrip"></div>
@@ -513,6 +519,7 @@ h1{font-size:clamp(30px,4.6vw,48px)}
       <h2>이렇게 읽으세요</h2>
       <ul>
         <li>예상 공고 시기는 2025·2026년 실제 공고일로 본 예상입니다. 「매년」은 두 해 모두 같은 시기에 나온 사업입니다.</li>
+        <li>내년 예상 공고는 참고용입니다. 정부 예산·정책 등 상황에 따라 시기와 내용이 바뀌거나 사업이 없어질 수 있습니다.</li>
         <li>지원 규모와 대상은 가장 최근 공고 기준이며, 빈 칸은 공고문을 참조하세요.</li>
         <li>「지금 신청 가능」은 2026.10.15 기준 마감 전인 공고만 보여주며, 마감일이 지나면 빠집니다. 평일마다 새 공고를 확인해 갱신합니다.</li>
         <li>링크는 공고를 낸 기관(발주기관)의 공고 글로 연결됩니다. 개별 글 주소가 없는 경우 그 기관의 사업공고 게시판으로 연결합니다.</li>
