@@ -337,6 +337,7 @@ h1{font-size:clamp(30px,4.6vw,48px)}
 .mode[aria-pressed="true"].m-plan{background:#CFE5D5}
 .mode[aria-pressed="true"].m-next .n,.mode[aria-pressed="true"].m-plan .n{color:var(--ink)}
 .mode:focus-visible{outline:3px solid var(--green);outline-offset:-6px}
+.basis-y{font-size:11.5px;font-weight:700;color:var(--green);margin:8px 0 -2px;letter-spacing:-.01em}
 .bar{margin:0 32px;border:3px solid var(--ink);padding:12px 14px;gap:10px}
 .tabs{gap:6px;flex:1 1 auto}
 .tab{display:inline-flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;border:1.5px solid rgba(255,255,255,.35)}
@@ -701,6 +702,7 @@ function liveStars(){ // 마감 지나 사라진 항목은 세지 않음
   const ok = new Set(OPEN.filter(o => o.end && parseD(o.end) >= today).map(o => "o:"+o.id).concat(DATA.map(d => "d:"+d.no), PLAN.map(p => "p:"+p.id)));
   return [...STARS].filter(k => ok.has(k));
 }
+const baseYr = d => esc((d.off && d.off.y) || (d.years && d.years[d.years.length-1]) || "");
 function card(d){
   const cats = d.cats.map(c => `<span class="chip">${esc(c)}</span>`).join("");
   const trLabel = {"필수":"기술이전 필수","우대·별도 트랙":"기술이전 우대","이전 전 단계 지원":"이전 준비 지원"};
@@ -716,6 +718,7 @@ function card(d){
       <h3 class="c-name">${esc(d.name)}</h3>
       <div class="c-sub"><span class="stamp">${esc(d.when)}</span><span>${esc(d.org || "")}</span></div>
       ${d.desc ? `<p class="c-desc">${esc(d.desc)}</p>` : ""}
+      ${baseYr(d) ? `<div class="basis-y">${baseYr(d)}년 공고 기준 · 내년엔 달라질 수 있음</div>` : ""}
       <div class="kv"><span class="k">지원</span><span class="v${d.support?"":" none"}" title="눌러서 전체 보기">${esc(d.support || "공고문 참조")}</span>
       <span class="k">대상</span><span class="v${d.target?"":" none"}" title="눌러서 전체 보기">${esc(d.target || "공고문 참조")}</span></div>
     </div>
