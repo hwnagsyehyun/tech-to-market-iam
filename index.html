@@ -893,4 +893,13 @@ document.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("cl
 render();
 </script>
 
+<!-- 네이버 애널리틱스(방문자 집계): iam-bp.kr에서만 동작 -->
+<script>
+if (/(^|\.)iam-bp\.kr$/.test(location.hostname)) {
+  window.wcs_add = window.wcs_add || {}; wcs_add["wa"] = "bd851a602a6c90";
+  var nas = document.createElement("script"); nas.src = "https://wcs.naver.net/wcslog.js"; nas.async = true;
+  nas.onload = function(){ if (window.wcs) { wcs_do(); } };
+  document.head.appendChild(nas);
+}
+</script>
 </body></html>
